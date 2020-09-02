@@ -1,0 +1,16 @@
+.element{
+    display: inline-block;
+    width: 2px;
+    margin: 0px 1px;
+    border: 1px solid white;
+    background-color: white;
+}
+.container{
+    position: center;
+}
+body{
+    background-color: black;
+}
+button{
+    margin: 5px;
+}
