@@ -3,6 +3,7 @@ import './Sorting.css'
 import {mergeSort} from "./Sorting Algos/MergeSort";
 import {HeapSort} from "./Sorting Algos/HeapSort";
 import {BubbleSort} from "./Sorting Algos/bubbleSort";
+// import 'favi.png' from "../public/"
 //npm run deploy - push to github pages
 class SortingComponent extends Component{
     constructor() {
@@ -17,6 +18,8 @@ class SortingComponent extends Component{
         const arr=this.getRandomArray(this.state.size);
         this.setState({arr});
         document.querySelector("input").value=this.state.size;
+        document.title="Sorting Visualiser"
+        // favicon.setAttribute("href","../public/favi.png");
         }
     handleChange(){
         // console.log(document.querySelector("input").value);
