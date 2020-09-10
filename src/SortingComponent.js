@@ -3,6 +3,7 @@ import './Sorting.css'
 import {mergeSort} from "./Sorting Algos/MergeSort";
 import {HeapSort} from "./Sorting Algos/HeapSort";
 import {BubbleSort} from "./Sorting Algos/bubbleSort";
+import {SelectionSort} from "./Sorting Algos/SelectionSort"
 // import 'favi.png' from "../public/"
 //npm run deploy - push to github pages
 class SortingComponent extends Component{
@@ -46,6 +47,8 @@ class SortingComponent extends Component{
     }
     animatemergeSort(arr){
         const buttons=document.getElementsByClassName('btn');
+        const rst=document.getElementsByClassName('rst');
+        rst[0].disabled=false;
         for(let i=0;i<buttons.length;i++)
         {
             buttons[i].disabled=true;
@@ -77,11 +80,14 @@ class SortingComponent extends Component{
         }
         setTimeout(()=>{
                 buttons[0].disabled=false;
+                rst[0].disabled=true
         },(l+1)*speed);
 
     }
     animateHeapSort(lul){
         const buttons=document.getElementsByClassName('btn');
+        const rst=document.getElementsByClassName('rst');
+        rst[0].disabled=false;
         for(let i=0;i<buttons.length;i++)
         {
             buttons[i].disabled=true;
@@ -105,10 +111,13 @@ class SortingComponent extends Component{
         }
         setTimeout(()=> {
             buttons[0].disabled=false;
+            rst[0].disabled=true
         },(l+1)*speed);
     }
     animateBubbleSort(arr){
         const buttons=document.getElementsByClassName('btn');
+        const rst=document.getElementsByClassName('rst');
+        rst[0].disabled=false;
         for(let i=0;i<buttons.length;i++)
         {
             buttons[i].disabled=true;
@@ -130,6 +139,36 @@ class SortingComponent extends Component{
         }
         setTimeout(()=> {
             buttons[0].disabled=false;
+            rst[0].disabled=true
+        },(l+1)*speed);
+    }
+    animateSelectionSort(arr)
+    {
+        const buttons=document.getElementsByClassName('btn');
+        const rst=document.getElementsByClassName('rst');
+        for(let i=0;i<buttons.length;i++)
+        {
+            buttons[i].disabled=true;
+        }
+        rst[0].disabled=false;
+        const bars=document.getElementsByClassName("element");
+        console.log(bars);
+        const speed=25;
+        let l=0;
+        for(let i=0;i<arr.length;i++)
+        {
+                let bar1=bars[arr[i][0]];
+                let bar2=bars[arr[i][1]];
+                // console.log(bar1);
+                setTimeout(()=>{
+                    bar1.style.height=`${arr[i][2]}px`;
+                    bar2.style.height=`${arr[i][3]}px`;
+                },(i )*speed);
+            l=i;
+        }
+        setTimeout(()=> {
+            buttons[0].disabled=false;
+            rst[0].disabled=true;
         },(l+1)*speed);
     }
     handleMergeSort(arr){
@@ -150,6 +189,13 @@ class SortingComponent extends Component{
         console.log(lul);
         this.animateBubbleSort(lul);
     }
+    handleSelectionSort(arr)
+    {
+        let lul=[[]];
+        lul=SelectionSort(arr);
+        console.log(lul);
+        this.animateSelectionSort(lul);
+    }
     render() {
         return(
             <div>
@@ -165,7 +211,8 @@ class SortingComponent extends Component{
         <button className="btn" onClick={()=>this.handleMergeSort(this.state.arr)}>Merge Sort</button>
         <button className="btn" onClick={()=>this.handleHeapSort(this.state.arr)}>Heap Sort</button>
         <button className="btn" onClick={()=>this.handleBubbleSort(this.state.arr)}>Bubble Sort</button>
-        <button >Temporary</button>
+        <button className="btn" onClick={()=>this.handleSelectionSort(this.state.arr)}>Selection Sort</button>
+        <button className="rst" onClick={() => window.location.reload(false)} >Reset</button>
         <div style={{color:'white',display:'inline',border:'1px solid white'}}><input className="btn" id="changeSize" type="range" min="50" max="200" style={{background: 'white', cursor: 'pointer'}} onChange={()=>this.handleChange()} />
             {this.state.size}</div>
         </div>
